@@ -23,6 +23,8 @@ const connectDb = async () => {
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`)
     await sequelize.authenticate()
     console.log(`MYSQL connected !!`)
+    await sequelize.sync()
+    console.log('All models were synchronized successfully.')
   } catch (err) {
     console.error('MYSQL connection error', err)
     process.exit(1)
