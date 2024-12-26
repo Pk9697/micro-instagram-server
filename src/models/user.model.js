@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../db/index.js'
+import Post from './post.model.js'
 
 const User = sequelize.define('User', {
   id: {

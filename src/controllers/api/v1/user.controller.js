@@ -86,7 +86,9 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 const getAllUsers = asyncHandler(async (_, res) => {
-  const users = await User.findAll({ attributes: ['name', 'postCount'] })
+  const users = await User.findAll({
+    attributes: ['name', 'postCount', 'mobileNumber'],
+  })
   return res.status(200).json(new ApiResponse(200, users))
 })
 
