@@ -85,4 +85,9 @@ const loginUser = asyncHandler(async (req, res) => {
     )
 })
 
-export { registerUser, loginUser }
+const getAllUsers = asyncHandler(async (_, res) => {
+  const users = await User.findAll({ attributes: ['name', 'postCount'] })
+  return res.status(200).json(new ApiResponse(200, users))
+})
+
+export { registerUser, loginUser, getAllUsers }
