@@ -1,12 +1,19 @@
 import fs from 'fs'
-import Post from '../../../models/post.model.js'
-import User from '../../../models/user.model.js'
+import { User, Post } from '../../../models/index.js'
 import { ApiError } from '../../../utils/ApiError.js'
 import { ApiResponse } from '../../../utils/ApiResponse.js'
 import { asyncHandler } from '../../../utils/asyncHandler.js'
 
 const getAllPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.findAll()
+  const posts = await Post.findAll({
+    include: [
+      {
+        model: User,
+        as: 'userDetails',
+        attributes: ['name', 'mobileNumber'],
+      },
+    ],
+  })
   return res.status(200).json(new ApiResponse(200, posts))
 })
 
